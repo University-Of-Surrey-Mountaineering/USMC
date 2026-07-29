@@ -7,10 +7,12 @@
   <title>University Of Surrey Mountaineering</title>
 </head>
 <body>
+
+
   <header class = "Banner">
     <div><img src="Photos/edited-photo.png"></div>
     <div></div>
-    <div class="login"><button>login</button></div>
+    <div class="login"><button onclick="location.href = 'login.php'">login</button></div>
   </header>   
 
   <div class = "Header">
@@ -23,6 +25,8 @@
   </div>
 
   <div class = "test">
+
+
 
 
     
