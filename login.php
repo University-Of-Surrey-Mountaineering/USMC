@@ -1,18 +1,75 @@
-<html>
-<body>
-
 <?php
 
+function test_input($data) {
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}
+
+function save_data($output) {
+  $out = explode("\n", $output);
+  if (count($out) == 2) {
+    
+    $ID = $out[0];
+    $uname = $out[1];
+    $_SESSION["ID"] = $ID;
+    $_SESSION["Username"] = $uname;
+    header("Location: dashboard.php");
+  }
+
+  else {
+    throw new Exception($output);
+  }
+
+  
+}
+
 session_start();
+$output = "";
 
-$uname = $_GET["UserName"];
-$pword = $_GET["Password"];
-$command = "python ./login.py " . $uname . " ".  $pword;
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  $uname = test_input($_POST["UserName"]);
+  $pword = test_input($_POST["Password"]);
+  $command = "python ./login.py '" . $uname . "' ".  $pword;
+  $output = trim(shell_exec($command));
+  try{
+    save_data($output);
+    $output = "";
+  }
+  catch (Exception $e) {}
 
-$output = shell_exec($command);
-echo $output;
+}
 
+$testout = $output;
 ?>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="login.css">
+  <title>University Of Surrey Mountaineering</title>
+</head>
+<body>
+  <div>
+    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+      <label for="Uname">Username: </label>
+
+      <input type="text" id="Uname" name = "UserName">
+
+      <br>
+      <label for="Pword">Password: </label>
+
+      <input type="text" id="Pword" name = "Password">
+
+      <input type="submit">
+      <?php echo $testout; ?>
+    </form>
+  </div>
 
 </body>
 </html>
