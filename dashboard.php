@@ -2,7 +2,7 @@
 
 
 session_start();
-
+$background_image = "Photos/IMG_0935.JPG";
 
 ?>
 
@@ -22,7 +22,29 @@ session_start();
         <div class="login"><button onclick="location.href = 'login.php'">login</button></div>
     </header>
 
-    <div class="trips">
+    <div class="container">
+        <div class="section">
+
+            <div></div>
+
+            <div class="next_trip">
+
+                <p>ttttttttt</p>
+
+                <style>
+                    .next_trip {
+                        background:url(<?php echo $background_image;?>);
+                        background-size:cover;
+                        width: auto;
+                        height: auto;
+                    }
+                </style>
+
+            </div>
+
+            <div></div>
+
+        </div>
         
     </div>
 

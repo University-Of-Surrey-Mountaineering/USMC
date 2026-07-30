@@ -24,6 +24,12 @@ body {
     text-align: center;
 }
 
+.Banner img {
+    max-height: 10vh;
+    padding: 0;
+    margin: 0;
+}
+
 .Header {
     width: 100vw;
     height: 100vh;
@@ -37,12 +43,7 @@ body {
     height: 100vh;
 }
 
-.Banner img {
-    max-height: 10vh;
-    padding: 0;
-    margin: 0;
 
-}
 
 .Header_Container {
     display: grid;
