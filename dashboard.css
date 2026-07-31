@@ -45,3 +45,12 @@ body {
     grid-template-columns: 20% 60% 20%;
 }
 
+.next_trip {
+    display:flex;
+    justify-content: center;
+    justify-items: center;
+    border-radius: 20px;
+    height: 60vh;
+    width: 60vw;
+    background-color: #afd9f2;
+}

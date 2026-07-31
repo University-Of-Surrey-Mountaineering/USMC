@@ -1,8 +1,7 @@
 <?php
 
-
 session_start();
-$background_image = "Photos/IMG_0935.JPG";
+$background_image = "Photos/IMG_0943.JPG";
 
 ?>
 
@@ -28,17 +27,25 @@ $background_image = "Photos/IMG_0935.JPG";
             <div></div>
 
             <div class="next_trip">
-
-                <p>ttttttttt</p>
-
-                <style>
-                    .next_trip {
-                        background:url(<?php echo $background_image;?>);
-                        background-size:cover;
-                        width: auto;
-                        height: auto;
-                    }
-                </style>
+                
+                <a>
+                    gggg
+                    <style>
+                        .next_trip a {
+                            margin: 5vh;
+                            grid: flex;
+                            justify-content: center;
+                            justify-items: center;
+                            background-color: white;
+                            height: 50vh;
+                            width: 50vw;
+                            background:url(<?php echo $background_image;?>);
+                            background-repeat: no-repeat;
+                            background-size: 100% 100%;
+                            border-radius: 20px;
+                        }
+                    </style>
+                </a>
 
             </div>
 
