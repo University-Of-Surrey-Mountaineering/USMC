@@ -23,7 +23,21 @@ $background_image = "Photos/IMG_0943.JPG";
 
     <div class="container">
         <div class="section">
+            <div></div>
 
+            <div class="next_trip">
+                
+                <a href = "user.php">
+                    gggg
+                </a>
+
+            </div>
+
+            <div></div>
+
+        </div>
+
+        <div class="section">
             <div></div>
 
             <div class="next_trip">

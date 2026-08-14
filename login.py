@@ -1,49 +1,36 @@
-import sqlite3 as sql
+import databaseconnection as data
 import sys
 
 
 class main:
-    def __init__(self, Uname,Pword):
+    def __init__(self, Uname, Pword):
         self.ID = 0
         self.Uname = Uname
-        self.Pword = Pword        
+        self.Pword = Pword
         
-        self.establishConnection()
+        self.data = data.main()
+        
         self.login()
-        self.closeConnection()
+        self.data.closeConnection()
         
         if self.ID == -1:
             print("Incorrect username or password")
         else:
             print(self.ID)
             print(self.Uname)
-        
-        
-        
-    def establishConnection(self):
-        try:
-            self.connection = sql.connect("Data.db")
-            self.Cursor = self.connection.cursor()
             
-        except sql.Error as error:
-            print('Error occurred -', error)
             
     def login(self):
         query = "SELECT ID FROM Users WHERE UserName == '" + self.Uname + "' AND Password == " + self.Pword
-        
         try:
-            self.Cursor.execute(query)
-            self.ID = self.Cursor.fetchone()[0]
+            self.ID = self.data.execute(query)
+            self.ID = self.data.fetchOne()
             
         except:
             self.ID = -1
-    
-    def closeConnection(self):
-        self.connection.close
         
 
 if __name__ == "__main__":
-    
     if len(sys.argv) > 3:
         print("There was an unexpected error")
     else:
