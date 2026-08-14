@@ -19,9 +19,9 @@ class main:
         except:
             raise Exception()
         
-    def fetchOne(self):
+    def fetchOneRecord(self):
         try:
-            return self.Cursor.fetchone()[0]
+            return self.Cursor.fetchone()
         except:
             raise Exception()
             
