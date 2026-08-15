@@ -8,12 +8,16 @@ class main:
         
         self.getInfo()
         self.data.closeConnection()
-        for counter in self.alldata:
-            print(counter)
+        
+        if self.id == -1:
+            print("Account not found")
+        else:
+            for counter in self.alldata:
+                print(counter)
         
         
     def getInfo(self):
-        query = "SELECT * FROM Users WHERE ID == " + self.id
+        query = "SELECT Forename, Surname, Committee, [Email Address], [Profile Picture] FROM Users WHERE ID == " + self.id
         
         try:
             self.data.execute(query)
@@ -21,16 +25,14 @@ class main:
             
         except:
             self.id = -1
-        
-    
-        
+
 
 if __name__ == "__main__":
-    if len(sys.argv) > 2:
+    if len(sys.argv) > 2 or len(sys.argv) < 2:
             print("There was an unexpected error")
     else:
         try:
             ID = sys.argv[1]
             main(ID)
         except:
-            print("Please enter your username and password")
+            print("Account not found")

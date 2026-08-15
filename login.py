@@ -21,10 +21,10 @@ class main:
             
             
     def login(self):
-        query = "SELECT ID FROM Users WHERE UserName == '" + self.Uname + "' AND Password == " + self.Pword
+        query = "SELECT ID FROM Users WHERE UserName == '" + self.Uname + "' AND Password == '" + self.Pword + "'"
         try:
-            self.ID = self.data.execute(query)
-            self.ID = self.data.fetchOne()[0]
+            self.data.execute(query)
+            self.ID = self.data.fetchOneRecord()[0]
             
         except:
             self.ID = -1
