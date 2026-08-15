@@ -19,12 +19,25 @@ class main:
         except:
             raise Exception()
         
+    def update(self, query):
+        try:
+            self.Cursor.execute(query)
+            self.connection.commit()
+        except:
+            raise Exception()
+        
     def fetchOneRecord(self):
         try:
             return self.Cursor.fetchone()
         except:
             raise Exception()
             
+    def fetchAllRecords(self):
+        try:
+            return self.Cursor.fetchall()
+        except:
+            raise Exception()
+    
     
     def getCursor(self):
         return self.Cursor

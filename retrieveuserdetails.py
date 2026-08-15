@@ -7,7 +7,6 @@ class main:
         self.data = data.main()
         
         self.getInfo()
-        self.data.closeConnection()
         
         if self.id == -1:
             print("Account not found")
@@ -25,6 +24,8 @@ class main:
             
         except:
             self.id = -1
+            
+        self.data.closeConnection()
 
 
 if __name__ == "__main__":

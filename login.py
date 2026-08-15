@@ -11,7 +11,6 @@ class main:
         self.data = data.main()
         
         self.login()
-        self.data.closeConnection()
         
         if self.ID == -1:
             print("Incorrect username or password")
@@ -28,6 +27,8 @@ class main:
             
         except:
             self.ID = -1
+            
+        self.data.closeConnection()
         
 
 if __name__ == "__main__":
