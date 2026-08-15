@@ -13,6 +13,13 @@ $surname = $out[1];
 $commitee = $out[2];
 $email_address = $out[3];
 
+$membercommand = "python ./retrievemembershipdetails.py " . $ID;
+$memberoutput = trim(shell_exec($membercommand));
+$memberout = explode("\n", $memberoutput);
+
+$membernumber = $memberout[0];
+$memberexp = $memberout[1];
+
 try {
     $pfp = $out[4];
 }
@@ -51,14 +58,20 @@ catch (Exception $e) {
 
 
             <div class = "details">
-                <p> Username: 
+                <p>Username: 
                     <?php echo $username;?>
                 </p>
-                <p> Name: 
+                <p>Name: 
                     <?php echo $forename . " " . $surname;?>
                 </p>
-                <p> Email Address: 
+                <p>Email Address: 
                     <?php echo $email_address;?>
+                </p>
+                <p>Membership Code:
+                    <?php echo $membernumber;?>
+                </p>
+                <p>Expiry Date:
+                    <?php echo $memberexp;?>
                 </p>
             </div>
 
