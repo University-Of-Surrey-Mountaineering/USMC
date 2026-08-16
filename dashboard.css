@@ -3,7 +3,7 @@
 
 body {
     text-align: center;
-    background-color: #4d678b;
+    background-color: #3c3c3c;
     padding: 0;
     margin: 0;
 }
@@ -19,7 +19,7 @@ body {
     margin: 0;
     padding: 0;
     text-align: left;
-    background-color: #afd9f2;
+    background-color: #d54e45;
 }
 
 .Banner div {
@@ -52,11 +52,10 @@ body {
     border-radius: 20px;
     height: 60vh;
     width: 60vw;
-    background-color: #afd9f2;
+    background-color: #d54e45;
 }
 
 .user_section {
-    text-decoration: none;
     display: grid;
     grid-template-columns: 30% 40% 30%;
     height: 30vh;
@@ -70,12 +69,12 @@ a:visited {
 }
 
 .member_details{
-    
+    text-decoration: none;
     width: 100%;
     display: grid;
     align-items: center;
     grid-template-columns: 50% 50%;
-    background-color: #afd9f2;
+    background-color: #d54e45;
     border-radius: 5%;
     
 }

@@ -48,9 +48,9 @@ $background_image = "Photos/IMG_0943.JPG";
 
     <div class="container">
 
-        <a class = "user_section" href = "user.php">
+        <div class = "user_section">
             <div></div>
-            <div class="member_details">
+            <a class="member_details" href = "user.php">
                 <div class = "pfp_container" href="">
                     <div id = "pfp"></div>
 
@@ -72,7 +72,7 @@ $background_image = "Photos/IMG_0943.JPG";
                         <?php echo $memberexp;?>
                     </p>
                 </div>
-            </div>
+            </a>
             <div></div>
             
             <style>
@@ -88,7 +88,7 @@ $background_image = "Photos/IMG_0943.JPG";
                 }
 
             </style>
-        </a>
+        </div>
     
         <div class="section">
             <div></div>
