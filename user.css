@@ -45,6 +45,8 @@ body {
     width: 100%;
 }
 
+
+
 .member_details{
     margin: 5vh;
     display: grid;
@@ -57,3 +59,4 @@ body {
 .details {
     text-align: left;
 }
+
