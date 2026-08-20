@@ -69,6 +69,7 @@ $testout = $output;
       <input type="submit">
       <?php echo $testout; ?>
     </form>
+    <button onclick="location.href = 'createprofile.php'">create a profile</button>
   </div>
 
 </body>

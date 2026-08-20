@@ -1,5 +1,15 @@
 <?php
 
+$username = "";
+$password = "";
+$confirm_password = "";
+$forename = "";
+$surname = "";
+$email = "";
+
+$confirm_error = "";
+
+
 function test_input($data) {
   $data = trim($data);
   $data = stripslashes($data);
@@ -7,8 +17,26 @@ function test_input($data) {
   return $data;
 }
 
-?>
 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = test_input($_POST["username"]);
+    $password = test_input($_POST["password"]);
+    $confirm_password = test_input($_POST["confirm_password"]);
+    $forename = test_input($_POST["forename"]);
+    $surname = test_input($_POST["surname"]);
+    $email = test_input($_POST["email"]);
+
+    if ($password != $confirm_password) {
+        $confirm_error = "Your passwords don't match";
+    }
+
+    else {
+        
+    }
+}
+
+
+?>
 
 
 <!DOCTYPE html>
@@ -32,27 +60,28 @@ function test_input($data) {
                         <input type="text" id = "username" name = "username">
                     </div>
                     <div>
-                    <label for = "password">Password: </label>
-                    <input type = "text" id = "password" name = "password">
+                        <label for = "password">Password: </label>
+                        <input type = "text" id = "password" name = "password">
                     </div>
                     <div>
-                    <label for = "confirm_password">Confirm Password: </label>
-                    <input type="text" id = "confirm_password" name = "confirm_password">
+                        <label for = "confirm_password">Confirm Password: </label>
+                        <input type="text" id = "confirm_password" name = "confirm_password">
+                        <?php echo $confirm_error; ?>
                     </div>
                     <div>
-                    <label for = "forename">Forename: </label>
-                    <input type="text" if = "forename" name = "forename">
+                        <label for = "forename">Forename: </label>
+                        <input type="text" if = "forename" name = "forename">
                     </div>
                     <div>
-                    <label for = "surname">Surname: </label>
-                    <input type="text" if = "surname" name = "surname">
+                        <label for = "surname">Surname: </label>
+                        <input type="text" if = "surname" name = "surname">
                     </div>
                     <div>
-                    <label for = "email">Email: </label>
-                    <input type="text" id = "email" name = "email">
+                        <label for = "email">Email: </label>
+                        <input type="text" id = "email" name = "email">
                     </div>
                     <div class = "submit">
-                        <input type="submit">
+                        <input type="submit" value = "Submit">
                     </div>
                 </form>
             </div>
