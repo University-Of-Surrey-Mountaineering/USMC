@@ -9,12 +9,28 @@ $email = "";
 
 $confirm_error = "";
 
+$output = "";
 
 function test_input($data) {
   $data = trim($data);
   $data = stripslashes($data);
   $data = htmlspecialchars($data);
   return $data;
+}
+
+function save_data($username, $password) {
+    $command = "python ./login.py '" . $username . "' ".  $password;
+    $out = trim(shell_exec($command));
+    $out = explode("\n", $out);
+    try {
+        if (count($out) == 2) {
+            $ID = $out[0];
+            $uname = $out[1];
+            $_SESSION["ID"] = $ID;
+            $_SESSION["Username"] = $uname;
+            header("Location: dashboard.php");
+        }}
+    catch (Exception $e) {}
 }
 
 
@@ -29,9 +45,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($password != $confirm_password) {
         $confirm_error = "Your passwords don't match";
     }
-
     else {
-        
+        $command = "python ./createprofile.py " . $username . " ".  $password . " " . $forename . " " . $surname . " " . $email;
+        $output = trim(shell_exec($command));
+        save_data($username, $password);
     }
 }
 
@@ -80,9 +97,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <label for = "email">Email: </label>
                         <input type="text" id = "email" name = "email">
                     </div>
+                    <?php echo $output; ?>
                     <div class = "submit">
                         <input type="submit" value = "Submit">
                     </div>
+                    
                 </form>
             </div>
         </div>
