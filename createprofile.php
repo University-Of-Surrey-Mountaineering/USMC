@@ -20,10 +20,11 @@ function test_input($data) {
 
 function save_data($username, $password) {
     $command = "python ./login.py '" . $username . "' ".  $password;
-    $out = trim(shell_exec($command));
-    $out = explode("\n", $out);
+    $output = trim(shell_exec($command));
+    $out = explode("\n", $output);
     try {
         if (count($out) == 2) {
+            session_start();
             $ID = $out[0];
             $uname = $out[1];
             $_SESSION["ID"] = $ID;

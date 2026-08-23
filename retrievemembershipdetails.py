@@ -36,6 +36,7 @@ class main:
         i = 0
         if len(self.out) == 0:
             print("You dont have a membership")
+            print("None")
         else:
             for counter in self.out:
                 self.memberships.append(Membership(counter))

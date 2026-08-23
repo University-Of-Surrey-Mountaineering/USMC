@@ -3,9 +3,14 @@
 
 body {
     text-align: center;
-    background-color: #3c3c3c;
     padding: 0;
     margin: 0;
+    background-image: url("Photos/IMG_0935.JPG");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100vw auto;
+    background-attachment: fixed;
+    
 }
 
 
@@ -38,11 +43,19 @@ body {
 
 .container {
     margin: 20px;
+    display: grid;
+    grid-template-columns: 20% 60% 20%;
+}
+
+#container {
+    background-color: #3c3c3c;
+    border-radius: 10%;
 }
 
 .section {
-    display: grid;
-    grid-template-columns: 20% 60% 20%;
+    display: flex;
+    justify-content: center;
+    justify-items: center;
 }
 
 .next_trip {
@@ -50,16 +63,20 @@ body {
     justify-content: center;
     justify-items: center;
     border-radius: 20px;
-    height: 60vh;
-    width: 60vw;
+    height: 30  vh;
+    width: 20vw;
     background-color: #d54e45;
 }
 
 .user_section {
     display: grid;
-    grid-template-columns: 30% 40% 30%;
+    grid-template-columns: 20% 60% 20%;
     height: 30vh;
     width: 100%;
+}
+
+.container div {
+    padding: 10px;
 }
 
 a:visited {
