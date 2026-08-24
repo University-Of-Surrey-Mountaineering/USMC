@@ -53,9 +53,8 @@ body {
 }
 
 .section {
-    display: flex;
-    justify-content: center;
-    justify-items: center;
+    display: grid;
+    grid-template-columns: 20% 60% 20%;
 }
 
 .next_trip {
@@ -63,8 +62,8 @@ body {
     justify-content: center;
     justify-items: center;
     border-radius: 20px;
-    height: 30  vh;
-    width: 20vw;
+    height: 30vh;
+    width: 100%;
     background-color: #d54e45;
 }
 

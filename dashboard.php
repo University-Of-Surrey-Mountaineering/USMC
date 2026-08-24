@@ -2,6 +2,8 @@
 
 session_start();
 
+$forename = $surname = $committee = $email_address = $membernumber = $memberexp = $pfp = "";
+
 if (!isset($_SESSION["ID"])){
     header("Location: login.php");
 }
@@ -23,13 +25,21 @@ else {
     try {
         $pfp = $out[4];
     }
+
     catch (Exception $e) {
         $pfp = "Photos/000099290029.jpg";
+    }
+
+    if (!isset($_SESSION["Committee"]) and $commitee == 1) {
+        $_SESSION["Committee"] = $commitee;
+    }
+
+    if (!isset($_SESSION["pfp"])) {
+        $_SESSION["Committee"] = $commitee;
     }
 }
 
 $background_image = "Photos/IMG_0943.JPG";
-
 
 ?>
 

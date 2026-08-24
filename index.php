@@ -19,7 +19,6 @@
     <div></div>
     <div class="Header_Container">
       <div class="Logo"><img src="Photos/edited-photo.png"></div>
-      <div class="USMC"><p>Welcome to the University Of Surrey Website</p></div>
     </div>
     <div></div>
   </div>
