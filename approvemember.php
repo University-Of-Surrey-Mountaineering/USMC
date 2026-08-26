@@ -1,33 +1,40 @@
 <?php
 
 session_start();
+$approvalid = "";
 $ID = $_SESSION["ID"];
 $out = "";
+$requestphoto = "";
 if (!isset($_SESSION["ID"])){
     header("Location: login.php");
 }
 else {
-    $command = "python ./getapproverequests.py";
-    $output = trim(shell_exec($command));
-    $out = explode("\n", $output);
-    $approvalid = $out[0];
-    $memberid = $out[1];
-    $requestphoto = $out[3];
+    try {
+        $command = "python ./getapproverequests.py";
+        $output = trim(shell_exec($command));
+        $out = explode("\n", $output);
+        $approvalid = $out[0];
+        $memberid = $out[1];
+        $requestphoto = $out[3];
+    }
+    catch (Exception $e) {}
+
+
 }
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    if (isset($_POST['accept']) > 0) {
-        unset($_POST['accept']);
+    if ($_POST['accept'] == 'accept') {
         $command = "python ./updaterequest.py " . $approvalid . " " . $ID . " " . $memberid . " " . $_POST['type'] . " " . "1";
         $output = trim(shell_exec($command));
         $out = explode("\n", $output);
         $out = $out[1];
+        header("Location: approvememberprocess.php");
     }
-    elseif (isset($_POST['deny']) > 0) {
-        unset($_POST['deny']);
-        $command = "python ./updaterequest.py " . $approvalid . " " . $ID . " " . $memberid . " " . $_POST['type'] . " " . "1";
+    elseif ($_POST['deny'] == 'deny') {
+        $command = "python ./updaterequest.py " . $approvalid . " " . $ID . " " . $memberid . " " . $_POST['type'] . " " . "-1";
         $output = trim(shell_exec($command));
         $out = explode("\n", $output);
         $out = $out[1];
+        header("Location: approvememberprocess.php");
     }
 }
 
@@ -50,24 +57,39 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <div></div>
         <div class="login"><button onclick="location.href = 'login.php'">login</button></div>
     </header>
-
-    <div>
-        <div class="photo">
-            <img id = "photo" src="Photos/IMG_0935.JPG">
-        </div>
-
-        <div class="submit">
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post">
+    <div id="section">
+        <div></div>
+        <div class = "section">
+            <div>
+                <?php if ($approvalid != "There are no approval requests"): ?>
+                    <div class="photo">
+                        <div></div>
+                        <div class="container">
+                            <img id = "photo" src="<?php echo $requestphoto; ?>">
+                        </div>
+                        <div></div>
+                    </div>
+                    <br>
+                    <div class="submit">
+                        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?> " method = "post">
+                            
+                            <input type="radio" name = "type" value = "semester" required> semester
+                            <input type="radio" name = "type" value="year" required> year
+                            <br>
+                            <input type = "submit" name = "accept" value="accept"/>
+                            <input type= "submit" name = "deny" value="deny" />
+                        </form>
+                        <? echo $out; ?>
+                    </div>
+                <?php else:?>
+                    <div>
+                        <h1>There are no current approval requests</h1>
+                    </div>
                 
-                <input type="radio" name = "type" value = "semester"> semester
-                <input type="radio" name = "type" value="year"> year
-                <br>
-                <input type = "submit" name = "accept" value="accept"/>
-                <input type= "submit" name = "deny" value="deny" />
-            </form>
-            <? echo $out
+                <?php endif; ?>
+            </div>
         </div>
+        <div></div>
     </div>
-
 </body>
 </html>
