@@ -7,8 +7,6 @@
   <title>University Of Surrey Mountaineering</title>
 </head>
 <body>
-
-
   <header class = "Banner">
     <div><img src="Photos/edited-photo.png"></div>
     <div></div>

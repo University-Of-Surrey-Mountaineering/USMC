@@ -27,6 +27,12 @@ catch (Exception $e) {
     $pfp = "Photos/000099290029.jpg";
 }
 
+function test_input($data) {
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}
 
 ?>
 
@@ -93,6 +99,42 @@ catch (Exception $e) {
 
         <div></div>
     </div>
+
+
+    <?php if ($commitee == 1): ?>
+        <?php 
+        $command = "python ./committeerole.py " . $ID;
+        $output = trim(shell_exec($command));
+        $out = explode("\n", $output);
+        $roles = $out[0];
+        $aboutme = explode("'", $roles);
+        $aboutme = $aboutme[1];
+
+        if ($_SERVER["REQUEST_METHOD"] == "POST" || $_POST['submit'] == "Save") {
+            $aboutme = test_input($_POST['aboutme']);
+            $command = "python ./committeerole.py " . $ID . " " . $aboutme;
+            $output = trim(shell_exec($command));
+            $out = explode("\n", $output);
+
+            header("Location: userprocess.php");
+        }
+        ?>
+        <form class = "whoami" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post">
+            <label for="aboutme">Tell us about yourself:</label>
+            <br>
+            <textarea class = "input" type="text" name = "aboutme" maxlength="500" cols="50"
+            rows="10"
+            <?php if ($aboutme == ""): ?>
+                placeholder = "Please Tell Us About Yourself"></textarea>
+            <?php else: ?>
+                ><?php echo $aboutme; ?> </textarea>
+            <?php endif ?>
+            <br>
+            <input type="submit" name = "submit" value="Save">
+        </form>
+
+    
+    <?php endif ?>
     
 
 </body>
