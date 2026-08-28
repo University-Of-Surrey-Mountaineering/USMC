@@ -55,22 +55,29 @@ $testout = $output;
   <title>University Of Surrey Mountaineering</title>
 </head>
 <body>
-  <div>
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
-      <label for="Uname">Username: </label>
-
-      <input type="text" id="Uname" name = "UserName">
-
-      <br>
-      <label for="Pword">Password: </label>
-
-      <input type="text" id="Pword" name = "Password">
-
-      <input type="submit">
-      <?php echo $testout; ?>
-    </form>
-    <button onclick="location.href = 'createprofile.php'">create a profile</button>
+  <div class = "login">
+    <div></div>
+    <div class="container">
+      <div class = section>
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+          <div>
+            <label for="Uname">Username: </label>
+            <input type="text" id="Uname" name = "UserName">
+          </div>
+          <div>
+            <label for="Pword">Password: </label>
+            <input type="text" id="Pword" name = "Password">
+          </div>
+          <div>
+            <input type="submit" value="Login">
+            <?php echo $testout; ?>
+          </div>
+        </form>
+        <button onclick="location.href = 'createprofile.php'">create a profile</button>
+        </div>
+      </div>
+      <div></div>
   </div>
-
+  
 </body>
 </html>

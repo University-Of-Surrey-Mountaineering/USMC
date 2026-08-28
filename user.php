@@ -132,10 +132,31 @@ function test_input($data) {
             <br>
             <input type="submit" name = "submit" value="Save">
         </form>
-
+    <?php endif; ?>
     
-    <?php endif ?>
-    
+    <div>
+        <form>
+            <div>
+                <label for="username">Change Username: </label>
+                <input type="text" name="username">
+            </div>
+            <div>
+                <label for = "password">Change Password: </label>
+                <input type="password" name = "password">
+            </div>
+            <div>
+                <label for="confirmpassword">Confirm Password: </label>
+                <input type="password" name ="confirmpassword">
+            </div>
+            <div>
+                <label for="email">Change email address: </label>
+                <input type="email" name = "email">
+            </div>
+            <div>
+                <input type="">
+            </div>
+        </form>
+    </div>
 
 </body>
 </html>
