@@ -1,6 +1,4 @@
 
-
-
 body {
     text-align: center;
     background-color: #3c3c3c;
@@ -85,4 +83,11 @@ body {
     grid-template-columns: 30% 40% 30%;
     bottom: 50%;
     width: 100vw;
+}
+
+
+.messagecontainer {
+    background-color: #e17d76;
+    border-radius: 10%;
+    
 }

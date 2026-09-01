@@ -204,7 +204,7 @@ function test_input($data) {
 
     <div id = "messageform" class = "messageform">
             <div></div>
-            <div>
+            <div class = "messagecontainer">
             <?php if ($_POST['submit'] == 'Save'):?>
                 <div>
                     <p>test</p>
