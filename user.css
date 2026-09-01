@@ -1,3 +1,6 @@
+
+
+
 body {
     text-align: center;
     background-color: #3c3c3c;
@@ -74,4 +77,12 @@ body {
     height: fit-content;
     font-size: 150%;
     border-radius: 5%;
+}
+
+.messageform {
+    display: none;
+    position: fixed;
+    grid-template-columns: 30% 40% 30%;
+    bottom: 50%;
+    width: 100vw;
 }

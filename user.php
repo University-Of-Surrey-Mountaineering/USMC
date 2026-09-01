@@ -103,6 +103,9 @@ function test_input($data) {
 
     <?php if ($commitee == 1): ?>
         <?php 
+        if (!isset($_POST['submit'])){
+            $_POST['submit'] = "";
+        }
         $command = "python ./committeerole.py " . $ID;
         $output = trim(shell_exec($command));
         $out = explode("\n", $output);
@@ -110,13 +113,13 @@ function test_input($data) {
         $aboutme = explode("'", $roles);
         $aboutme = $aboutme[1];
 
-        if ($_SERVER["REQUEST_METHOD"] == "POST" || $_POST['submit'] == "Save") {
+        if ($_SERVER["REQUEST_METHOD"] == "POST" and $_POST['submit'] == 'Save') {
             $aboutme = test_input($_POST['aboutme']);
-            $command = "python ./committeerole.py " . $ID . " " . $aboutme;
-            $output = trim(shell_exec($command));
-            $out = explode("\n", $output);
+            //$command = "python ./committeerole.py " . $ID . " " . $aboutme;
+            //$output = trim(shell_exec($command));
+            //$out = explode("\n", $output);
 
-            header("Location: userprocess.php");
+            //header("Location: userprocess.php");
         }
         ?>
         <form class = "whoami" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post">
@@ -133,9 +136,49 @@ function test_input($data) {
             <input type="submit" name = "submit" value="Save">
         </form>
     <?php endif; ?>
+
+
+    <?php 
+    $confirm = "";
+    if (!isset($_POST['changedetails'])){
+            $_POST['changedetails'] = "";
+        }
+    if ($_SERVER["REQUEST_METHOD"] == "POST" and $_POST['changedetails'] == 'Submit') {
+        $changeusername = test_input($_POST['username']);
+        if (!(test_input($_POST['password']) == test_input($_POST['confirmpassword']))) {
+            $confirm = "Your passwords dont match";
+            $changepassword = "passwordsnull";
+        }
+        else {
+            $changepassword = test_input($_POST['password']);
+        }
+        $changeemail = test_input($_POST['email']);
+
+        if ($changeusername == "" and $changepassword == "" and $changeemail == ""){
+            $confirm = "Please enter your details you would like to change";
+        }
+        elseif ($changepassword != "passwordsnull") {
+            if ($changeusername == "") {
+                $changeusername = "ifyouarereadingthisgoandfuckyourself,thereisnothingtoseehere.thislongassstringisheretoavoidnullerrors";
+            }
+            if ($changepassword == "") {
+                $changepassword = "ifyouarereadingthisgoandfuckyourself,thereisnothingtoseehere.thislongassstringisheretoavoidnullerrors";
+            }
+            if ($changeemail == ""){
+                $changeemail = "ifyouarereadingthisgoandfuckyourself,thereisnothingtoseehere.thislongassstringisheretoavoidnullerrors";
+            }
+            //$command = "python ./changedetails.py " . $ID . " " . $changeusername . " " . $changepassword . " " . $changeemail;
+            //$output = trim(shell_exec($command));
+            //$out = explode("\n", $output);
+            //header("Location: userprocess.php");
+
+        }
+    }
     
+    ?>
     <div>
-        <form>
+        <form class = "changedetails" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post">
+            <p><?php echo $confirm; ?></p>
             <div>
                 <label for="username">Change Username: </label>
                 <input type="text" name="username">
@@ -153,11 +196,41 @@ function test_input($data) {
                 <input type="email" name = "email">
             </div>
             <div>
-                <input type="">
+                <input type="submit" name = "changedetails" value = "Submit"/>
             </div>
+            
         </form>
     </div>
 
+    <div id = "messageform" class = "messageform">
+            <div></div>
+            <div>
+            <?php if ($_POST['submit'] == 'Save'):?>
+                <div>
+                    <p>test</p>
+                    <button onclick="location.href = 'userprocess.php'"></button>
+                </div>
+            <?php elseif ($_POST['changedetails'] == 'Submit'): ?>
+                <div>
+                    <p>test22</p>
+                    <button onclick="location.href = 'userprocess.php'"></button>
+                </div>
+            <?php endif; ?>
+            </div>  
+            <div></div>
+    </div>
 </body>
+
+
+<script>
+    onload = openmessage()
+    function openmessage() {
+        <?php if ($_POST['submit'] == 'Save' or $_POST['changedetails'] == 'Submit'): ?>
+            document.getElementById("messageform").style.display = "grid";
+        <?php endif; ?>
+    }
+
+</script>
+
 </html>
 
