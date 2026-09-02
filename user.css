@@ -42,19 +42,20 @@ body {
 .container {
     display: grid;
     grid-template-columns: 30% 40% 30%;
-    height: 50vh;
+    height: fit-content;
     width: 100%;
+    padding: 1%;
 }
 
 
 
 .member_details{
-    margin: 5vh;
+    padding: 5%;
     display: grid;
     align-items: center;
     grid-template-columns: 50% 50%;
     background-color: #d54e45;
-    border-radius: 20%;
+    border-radius: 20%
 }
 
 .details {
@@ -62,8 +63,7 @@ body {
 }
 
 .whoami {
-    padding: 15%;
-    margin: 10%;
+    padding: 1%;
     background-color: #d54e45;
     border-radius: 5%;
     font-size: 150%;
@@ -81,13 +81,39 @@ body {
     display: none;
     position: fixed;
     grid-template-columns: 30% 40% 30%;
-    bottom: 50%;
+    bottom: 25%;
     width: 100vw;
 }
 
 
 .messagecontainer {
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
     background-color: #e17d76;
     border-radius: 10%;
+    margin: 10px;
+    height: 40vh;
+}
+
+
+.changedetailscontainer {
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    padding: 1%;
+}
+
+.changedetails {
+    background-color: #d54e45;
+    padding: 1%;
+    border-radius: 5%;
+}
+
+.changedetails div {
+    display: grid;
+    grid-template-columns: 50% 50%;
     
 }

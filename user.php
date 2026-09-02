@@ -115,11 +115,9 @@ function test_input($data) {
 
         if ($_SERVER["REQUEST_METHOD"] == "POST" and $_POST['submit'] == 'Save') {
             $aboutme = test_input($_POST['aboutme']);
-            //$command = "python ./committeerole.py " . $ID . " " . $aboutme;
-            //$output = trim(shell_exec($command));
-            //$out = explode("\n", $output);
-
-            //header("Location: userprocess.php");
+            $command = "python ./committeerole.py " . $ID . " " . $aboutme;
+            $output = trim(shell_exec($command));
+            $out = explode("\n", $output);
         }
         ?>
         <form class = "whoami" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post">
@@ -167,16 +165,16 @@ function test_input($data) {
             if ($changeemail == ""){
                 $changeemail = "ifyouarereadingthisgoandfuckyourself,thereisnothingtoseehere.thislongassstringisheretoavoidnullerrors";
             }
-            //$command = "python ./changedetails.py " . $ID . " " . $changeusername . " " . $changepassword . " " . $changeemail;
-            //$output = trim(shell_exec($command));
-            //$out = explode("\n", $output);
-            //header("Location: userprocess.php");
-
+            $command = "python ./changedetails.py " . $ID . " " . $changeusername . " " . $changepassword . " " . $changeemail;
+            $output = trim(shell_exec($command));
+            $out = explode("\n", $output);
+            $confirm = $out[0];
+            
         }
     }
     
     ?>
-    <div>
+    <div class = "changedetailscontainer">
         <form class = "changedetails" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post">
             <p><?php echo $confirm; ?></p>
             <div>
@@ -195,27 +193,28 @@ function test_input($data) {
                 <label for="email">Change email address: </label>
                 <input type="email" name = "email">
             </div>
-            <div>
-                <input type="submit" name = "changedetails" value = "Submit"/>
-            </div>
+            
+            <input type="submit" name = "changedetails" value = "Submit"/>
             
         </form>
     </div>
 
     <div id = "messageform" class = "messageform">
             <div></div>
-            <div class = "messagecontainer">
-            <?php if ($_POST['submit'] == 'Save'):?>
-                <div>
-                    <p>test</p>
-                    <button onclick="location.href = 'userprocess.php'"></button>
+            <div class = "test">
+                <div class = "messagecontainer">
+                    <?php if ($_POST['submit'] == 'Save'):?>
+                        <div>
+                            <p>test</p>
+                            <button onclick="location.href = 'userprocess.php'">OK</button>
+                        </div>
+                    <?php elseif ($_POST['changedetails'] == 'Submit'): ?>
+                        <div>
+                            <p><?php echo $confirm; ?></p>
+                            <button onclick="location.href = 'userprocess.php'">OK</button>
+                        </div>
+                    <?php endif; ?>
                 </div>
-            <?php elseif ($_POST['changedetails'] == 'Submit'): ?>
-                <div>
-                    <p>test22</p>
-                    <button onclick="location.href = 'userprocess.php'"></button>
-                </div>
-            <?php endif; ?>
             </div>  
             <div></div>
     </div>

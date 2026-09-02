@@ -22,16 +22,14 @@ class main:
     
     def updatetable(self, username):
         query1 = "SELECT ID FROM Users WHERE UserName == '" + username + "';"
-        print(self.query)
-        print(query1)
         try:
             data = Data.main()
             data.execute(query1)
             data.fetchOneRecord()[0]
-            
             print("Username is already in use")
         except:
             data.update(self.query)
+            print("Your details have been updated")
         data.closeConnection
     
 if __name__ == "__main__":
