@@ -48,7 +48,6 @@ body {
 }
 
 
-
 .member_details{
     padding: 5%;
     display: grid;
@@ -115,5 +114,18 @@ body {
 .changedetails div {
     display: grid;
     grid-template-columns: 50% 50%;
-    
+
+}
+
+
+.profilepicuploadcontainer {
+    display: none;
+    position: fixed;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    width: 100vw;
+    height: 40vh;
+    bottom: 25%;
+    background-color: white;
 }

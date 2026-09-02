@@ -30,10 +30,10 @@ class updateroles:
         
     def updateallroles(self, aboutme):
         query = "UPDATE Committee SET [About Me] = '" + aboutme + "' WHERE [Current User] == " + self.id + ";"
-        print(query)
         try:
             data = Data.main()
             data.update(query)
+            print("Correctly updated details")
         except:
             print("There was an unexpected error")
         data.closeConnection()

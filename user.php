@@ -1,7 +1,7 @@
 <?php 
 
 session_start();
-
+$aboutmeout = "";
 $ID = $_SESSION["ID"];
 $username = $_SESSION["Username"];
 $command = "python ./retrieveuserdetails.py " . $ID;
@@ -57,7 +57,7 @@ function test_input($data) {
 
         <div class = "member_details">
         
-            <a class = "pfp_container" href="">
+            <a class = "pfp_container" onclick="uploadpicture()">
                 <div id = "pfp">
                 </div>
             </a>
@@ -99,7 +99,22 @@ function test_input($data) {
 
         <div></div>
     </div>
+    <?php 
+    if ($_SERVER["REQUEST_METHOD"] == "POST" and $_POST['pfpsubmit'] == 'pfpsubmit') {
+        $test = $_POST['uploadedpfp'];
+    }
 
+
+    ?>
+    <img src="<?php echo $test;?>"> 
+    <div class="profilepicuploadcontainer" id = "pfpupload">
+        <div>
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post">
+                <input type="file" name = "uploadedpfp" accept=".jpg, .jpeg, .png">
+                <input type="submit" name = "pfpsubmit" value = "pfpsubmit">
+            </form>
+        </div>
+    </div>
 
     <?php if ($commitee == 1): ?>
         <?php 
@@ -118,6 +133,7 @@ function test_input($data) {
             $command = "python ./committeerole.py " . $ID . " " . $aboutme;
             $output = trim(shell_exec($command));
             $out = explode("\n", $output);
+            $aboutmeout = $out[0];
         }
         ?>
         <form class = "whoami" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post">
@@ -198,14 +214,13 @@ function test_input($data) {
             
         </form>
     </div>
-
     <div id = "messageform" class = "messageform">
             <div></div>
             <div class = "test">
                 <div class = "messagecontainer">
                     <?php if ($_POST['submit'] == 'Save'):?>
                         <div>
-                            <p>test</p>
+                            <p><?php echo $aboutmeout; ?></p>
                             <button onclick="location.href = 'userprocess.php'">OK</button>
                         </div>
                     <?php elseif ($_POST['changedetails'] == 'Submit'): ?>
@@ -227,6 +242,10 @@ function test_input($data) {
         <?php if ($_POST['submit'] == 'Save' or $_POST['changedetails'] == 'Submit'): ?>
             document.getElementById("messageform").style.display = "grid";
         <?php endif; ?>
+    }
+
+    function uploadpicture() {
+        document.getElementById("pfpupload").style.display = "flex";
     }
 
 </script>
