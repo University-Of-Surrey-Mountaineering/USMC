@@ -101,7 +101,9 @@ function test_input($data) {
     </div>
     <?php 
     if ($_SERVER["REQUEST_METHOD"] == "POST" and $_POST['pfpsubmit'] == 'pfpsubmit') {
-        mkdir("Photos/UserImages/" . $ID . "/");
+        if  (!file_exists("Photos/UserImages/" . $ID . "/")){
+            mkdir("Photos/UserImages/" . $ID . "/");
+        }
         $targetdestination = "Photos/UserImages/" . $ID . "/";
         $targetfile = $targetdestination . basename($_FILES["uploadedpfp"]["name"]);
         $check = getimagesize($_FILES['uploadedpfp']['tmp_name']);
@@ -113,7 +115,7 @@ function test_input($data) {
 
         if ($uploadok == 1) {
             if (move_uploaded_file($_FILES["uploadedpfp"]["tmp_name"], $targetfile)) {
-                $uploadcommand = "python ./pfpupload.py " . $ID . " " . $targetfile;
+                $uploadcommand = "python ./imgupload.py 1 " . $ID . " " . $targetfile;
                 echo $uploadcommand;
                 $uploadoutput = trim(shell_exec($uploadcommand));
                 $uploadout = explode("\n", $uploadoutput);
@@ -139,6 +141,46 @@ function test_input($data) {
             </form>
         </div>
     </div>
+
+
+
+    <?php if ($membernumber == "You dont have a membership"): ?>
+        <?php
+        if ($_SERVER["REQUEST_METHOD"] == "POST" and $_POST['approvalsubmit'] == "approvalsubmit"){
+            if  (!file_exists("Photos/UserImages/" . $ID . "/")){
+                mkdir("Photos/UserImages/" . $ID . "/");
+            }
+            $approvaldestination = "Photos/UserImages/" . $ID . "/";
+            $approvalfile = $approvaldestination . basename($_FILES["approvalimage"]["name"]);
+            $appcheck = getimagesize($_FILES['approvalimage']['tmp_name']);
+            if ($appcheck !== false) {
+                $upload = 1;
+            } else {
+                $upload = 0;
+            }
+            if ($upload == 1) {
+                if (move_uploaded_file($_FILES['approvalimage']['tmp_name'], $approvalfile)) {
+                    $uploadcommand = "python ./imgupload.py 2 " . $ID . " " . $approvalfile;
+                    $uploadoutput = trim(shell_exec($uploadcommand));
+                    $uploadout = explode("\n", $uploadoutput);
+                    if ($uploadout[0] == "Success") {
+                        echo "Approval sent successfully";
+                    } else {
+                        echo "Error occured";
+                    }
+                }
+            }
+        }
+        
+
+            
+        ?>
+
+        <form action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post" enctype="multipart/form-data">
+            <input type="file" name = "approvalimage" accept=".jpg, .jpeg, .png">
+            <input type="submit" name = "approvalsubmit" value="approvalsubmit">
+        </form>
+    <?php endif; ?>
 
     <?php if ($commitee == 1): ?>
         <?php 
