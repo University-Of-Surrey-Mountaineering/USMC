@@ -101,15 +101,39 @@ function test_input($data) {
     </div>
     <?php 
     if ($_SERVER["REQUEST_METHOD"] == "POST" and $_POST['pfpsubmit'] == 'pfpsubmit') {
-        $test = $_POST['uploadedpfp'];
+        mkdir("Photos/UserImages/" . $ID . "/");
+        $targetdestination = "Photos/UserImages/" . $ID . "/";
+        $targetfile = $targetdestination . basename($_FILES["uploadedpfp"]["name"]);
+        $check = getimagesize($_FILES['uploadedpfp']['tmp_name']);
+        if ($check !== false) {
+            $uploadok = 1;
+        } else {
+            $uploadok = 0;
+        }
+
+        if ($uploadok == 1) {
+            if (move_uploaded_file($_FILES["uploadedpfp"]["tmp_name"], $targetfile)) {
+                $uploadcommand = "python ./pfpupload.py " . $ID . " " . $targetfile;
+                echo $uploadcommand;
+                $uploadoutput = trim(shell_exec($uploadcommand));
+                $uploadout = explode("\n", $uploadoutput);
+                if ($uploadout[0] == "Success") {
+                    echo "Successfully uploaded";
+                } else {
+                    echo "An error occured";
+                }
+            } else {
+                echo "An error occured stopping upload";   
+            }
+        } else {
+            echo "There was an error";
+        }
+        header("Location: userprocess.php");
     }
-
-
     ?>
-    <img src="<?php echo $test;?>"> 
     <div class="profilepicuploadcontainer" id = "pfpupload">
         <div>
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post">
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post" enctype="multipart/form-data">
                 <input type="file" name = "uploadedpfp" accept=".jpg, .jpeg, .png">
                 <input type="submit" name = "pfpsubmit" value = "pfpsubmit">
             </form>
