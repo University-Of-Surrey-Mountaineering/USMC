@@ -35,7 +35,7 @@ else {
     }
 
     if (!isset($_SESSION["pfp"])) {
-        $_SESSION["Committee"] = $commitee;
+        $_SESSION["pfp"] = $pfp;
     }
 }
 
@@ -108,7 +108,7 @@ $background_image = "Photos/IMG_0943.JPG";
                 <div></div>
                 <div class="next_trip">
                     
-                    <a>
+                    <a href = "trips.php">
                         gggg
                         <style>
                             .next_trip a {

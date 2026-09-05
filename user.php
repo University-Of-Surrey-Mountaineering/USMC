@@ -27,6 +27,14 @@ catch (Exception $e) {
     $pfp = "Photos/000099290029.jpg";
 }
 
+if (!isset($_SESSION["Committee"]) and $commitee == 1) {
+    $_SESSION["Committee"] = $commitee;
+}
+
+if (!isset($_SESSION["pfp"])) {
+    $_SESSION["pfp"] = $pfp;
+}
+
 function test_input($data) {
   $data = trim($data);
   $data = stripslashes($data);
@@ -171,9 +179,6 @@ function test_input($data) {
                 }
             }
         }
-        
-
-            
         ?>
 
         <form action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post" enctype="multipart/form-data">
