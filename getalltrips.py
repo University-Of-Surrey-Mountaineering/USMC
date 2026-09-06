@@ -1,12 +1,21 @@
 import databaseconnection as Data
 import datetime as date
+import sys
 
 
 class main:
-    def __init__(self):
-        result = self.getalltrips()
+    def __init__(self, id):
+        if id == None:
+            result = self.getalltrips()
+            accept = 0
+        else:
+            accept, result = self.getonetrip(id)
+            
         if result == None:
             print("None")
+        elif accept == 1 and result != None:
+            for counter in result:
+                print(counter)
         else:
             for counter in result:
                 print(counter)
@@ -29,6 +38,25 @@ class main:
         except:
             return None
         
+    def getonetrip(self, id):
+        query = "SELECT [Trip Name], [Trip Date], Details FROM Trips WHERE ID == " + id + ";"
+        try:
+            data = Data.main()
+            data.execute(query)
+            result = data.fetchOneRecord()
+            if len(result) == 0:
+                return 0, None
+            else: 
+                return 1, result
+        except:
+            return 0, None
     
 if __name__ == "__main__":
-    main()
+    if len(sys.argv) == 1:
+        id = None
+        main(id)
+    elif len(sys.argv) == 2:
+        id = sys.argv[1]
+        main(id)
+    else:
+        print("None")

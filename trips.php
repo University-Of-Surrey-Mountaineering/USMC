@@ -1,9 +1,11 @@
 <?php 
 session_start();
 
-if (isset($_SESSION["tripid"])) {
-    unset($_SESSION["tripid"]);
+if (isset($_SESSION['tripid'])) {
+    unset($_SESSION['tripid']);
+    unset($_SESSION['tripname']);
 }
+
 if (!isset($_SESSION["ID"])) { 
     header("Location: login.php");
 }
@@ -22,6 +24,7 @@ if ($trips[0] == "None") {
 } else {
     $tripsempty = 1;
 }
+
 ?>
     
 <!DOCTYPE html>
@@ -39,6 +42,7 @@ if ($trips[0] == "None") {
             <div></div>
             <div class="login"><button onclick="location.href = 'login.php'">login</button></div>
         </header>
+        <h1>Upcoming trips</h1>
         <?php if ($tripsempty): ?>
             <?php foreach ($trips as $index => $counter): ?>
             
@@ -52,12 +56,11 @@ if ($trips[0] == "None") {
                 ?>
 
                 <div>
-                    <h1>Upcoming trips</h1>
                     <div>
-                        <form action="trip.php" method="post">
-                            <a href = "" onclick="tripclick()">
-                                test
-
+                        <form action = "trip.php" method="post" id = "<?php echo $tripid ?>">
+                            <a onclick="trip(<?php echo $tripid; ?>)" id = 'tripsubmit'>
+                                <?php echo $tripname; ?>
+                                <input type="hidden" value="<?php echo $tripid; ?>" name="tripid">
                             </a>
                         </form>
                     </div>
@@ -66,12 +69,15 @@ if ($trips[0] == "None") {
         <?php else: ?>
             <p>No trips</p>
         <?php endif; ?>
-        
-    </body>
-
+    
     <script>
-        tripclick(){
-            <? $_SESSION['tripid'] = "0" ?>
+
+        function trip(tripid) {
+            document.getElementById(tripid).submit();
         };
+
     </script>
+
+    </body>
+    
 </html>
