@@ -3,6 +3,32 @@
 session_start();
 $tripid = $_SESSION['tripid'];
 $tripname = $_SESSION['tripname'];
+$userid = $_SESSION['ID'];
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $pronouns = $_POST['pronouns'];
+    $phonenum = $_POST['phonenum'];
+    $harness = $_POST['harness'];
+    $helmet = $_POST['helmet'];
+    if ($harness != "on") {
+        $harness = "none";
+    }
+    if ($helmet != "on") {
+        $helmet = "none";
+    }
+    $bmcmember = $_POST['bmcmember'];
+    $emergencycont = $_POST['emergencycont'];
+    $relation = $_POST['relation'];
+    $emgnumber = $_POST['emgnum'];
+    $medconditions = $_POST['medconditions'];
+    $command = trim("python ./signup.py " . $tripid . " " . $userid . " " . $pronouns . " " . $phonenum . " " . $harness . " " . $helmet . " " . $bmcmember . " " . $emergencycont . " " . $relation . " " . $emgnumber . " " . $medconditions);
+    echo $command;
+    $output = shell_exec($command);
+    $out = explode("\n", $output);
+}
+
+
+
 ?>
 
 
@@ -16,17 +42,15 @@ $tripname = $_SESSION['tripname'];
         <title>University Of Surrey Mountaineering</title>
         </head>
     <body>
-        
         <header class = "Banner">
             <div><img src="Photos/edited-photo.png"></div>
             <div></div>
             <div class="login"><button onclick="location.href = 'login.php'">login</button></div>
         </header>
 
-
     <div>
         <h1><?php echo $tripname; ?></h1>
-        <form>
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
             <h3>Climbing, hill walking and mountaineering are activities with a danger of personal injury or death.
                  Participants in these activities should be aware of and accept these risks and be responsible
                   for their own actions and involvement. The club where possible will provide equipment and training to reduce the risks of such activities.
