@@ -1,3 +1,33 @@
+<?php 
+$command = trim("python ./getallcommittee.py");
+$output = shell_exec($command);
+$out = explode("\n", $output);
+
+function testdata($string) {
+  if ($string[0] == "("){
+    return substr($string, 2, -1);
+  }
+  elseif (substr($string, -1) == ")"){
+    return substr($string, 2, -2);
+  }
+  else {
+    return substr($string, 2, -1);
+  }
+}
+
+function fixcommittee($string) {
+  $arr = explode(",", $string);
+  $commitarr = [];
+  foreach ($arr as $c => $i){
+    $commitarr[] = testdata($i); 
+  }
+  return $commitarr;
+}
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,12 +51,58 @@
     <div></div>
   </div>
 
-  <div class = "test">
+  <div class="description">
+    <div>
+      <h3>We are a friendly and welcoming club with a shared passion for climbing and mountaineering. Whether you're a complete beginner or an experienced climber, we offer something for everyone! Our weekly climbing sessions take place at Surrey Summit, where you can develop your skills, meet like-minded people, and have fun. We also organize regular trips, including outdoor climbing, mountain climbing and hiking, and unparalleled vibes. community is at the heart of what we do, ensuring a supportive and friendly environment for all. Join us for exciting challenges, breath-taking views, and an amazing community full of energy and good vibes!</h3>
+      <h4>
+Weekly activities:<br>
+Monday climbing session - 7pm to 9pm<br>
+Wednesday climbing session - 3pm to 5pm<br>
+Friday climbing session - 7pm to 9pm</h4>
+<h4>
 
+What we also do: <br>
+- Regular socials! (both drinking and non-drinking) <br>
+- Amazing trips... such as our annual trips to Ailefroide in the French Alps.<br>
+- Top rope and lead climbing training all included in your membership <br>
+</h4>
+    </div>
+  </div>
 
+  <div class="committee">
+    <?php foreach ($out as $index => $counter): ?>
+      <?php $member = fixcommittee($counter);
+      $fullname = $member[0] . " " . $member[1]; 
+      $pfp = $member[2];
+      $rolename = $member[3];
+      $about = $member[4];
+      ?> <br>
+      <div>
+        <div class = "pfp">
+          <div id="pfp"></div>
+        </div>
+        <div>
+          <p><?php echo $fullname;?></p>
+          <p><?php echo $rolename;?></p>
+          <p><?php echo $about;?></p>
+        </div>
 
+        <style>
+          #pfp {
+            justify-content: center;
+            height:20vh;
+            width:10vw;
+            background-image: url(<?php echo $pfp;?>);
+            border-radius: 50%;
+            background-position: center;
+            background-size: auto 30vh;
+            background-repeat: no-repeat;
+            background-color: white;
+            }
+        </style>
+      </div>
 
-    
+    <?php endforeach; ?>
   </div>
 
 

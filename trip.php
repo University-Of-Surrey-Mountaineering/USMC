@@ -36,6 +36,11 @@ $_SESSION["tripname"] = $tripname;
                 <a href = "signup.php">
                     Sign up
                 </a>
+                <br>
+                <?php if ($_SESSION['Committee'] == 1): ?>
+                    <a href="signups.php">Signups</a>
+                <?php endif; ?>
+
             </div>
 
         </div>

@@ -1,6 +1,6 @@
 body {
     text-align: center;
-    background-color: #4d678b;
+    background-color: #3c3c3c;
     padding: 0;
     margin: 0;
 }
@@ -84,3 +84,16 @@ body {
     border-radius: 30px;
 }
 
+.description {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    justify-items: center;
+}
+
+
+.committee {
+    display: grid;
+    grid-template-columns: 20% 80%;
+    background-color: #e17d76;
+}
