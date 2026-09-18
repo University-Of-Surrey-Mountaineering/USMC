@@ -69,38 +69,56 @@ What we also do: <br>
     </div>
   </div>
 
-  <div class="committee">
+  <div class = "commitcont">
     <?php foreach ($out as $index => $counter): ?>
       <?php $member = fixcommittee($counter);
       $fullname = $member[0] . " " . $member[1]; 
       $pfp = $member[2];
       $rolename = $member[3];
       $about = $member[4];
-      ?> <br>
-      <div>
-        <div class = "pfp">
-          <div id="pfp"></div>
-        </div>
-        <div>
-          <p><?php echo $fullname;?></p>
-          <p><?php echo $rolename;?></p>
-          <p><?php echo $about;?></p>
-        </div>
+      ?>
+      <div></div>
+      <div class="committee">
+          <div class = "pfp">
+            <div id="pfp<?php echo $index; ?>"></div>
+          </div>
+          <div class = "desc">
+            <div class="about">
+              <div>
+                <p>Role:</p>
+                <p><?php echo $rolename;?></p>
+              </div>
+              <div>
+                <p>My name is: </p>
+                <p><?php echo $fullname;?></p>
+              </div>  
+            </div>
+            <br>
+            <div class = "about">
+              <div>
+                <p>About me:</p>
+                <p class = "text"> <?php echo $about;?> </p>
+              </div>  
+            </div>
+          </div>
+          <br>
 
-        <style>
-          #pfp {
-            justify-content: center;
-            height:20vh;
-            width:10vw;
-            background-image: url(<?php echo $pfp;?>);
-            border-radius: 50%;
-            background-position: center;
-            background-size: auto 30vh;
-            background-repeat: no-repeat;
-            background-color: white;
-            }
-        </style>
+          <style>
+            #pfp<?php echo $index; ?> {
+              justify-items: center;
+              justify-content: center;
+              height:20vh;
+              width:10vw;
+              background-image: url(<?php echo $pfp;?>);
+              border-radius: 50%;
+              background-position: center;
+              background-size: auto 20vh;
+              background-repeat: no-repeat;
+              margin: 1%;
+              }
+          </style>
       </div>
+      <div></div>
 
     <?php endforeach; ?>
   </div>

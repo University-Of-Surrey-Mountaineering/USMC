@@ -94,6 +94,46 @@ body {
 
 .committee {
     display: grid;
-    grid-template-columns: 20% 80%;
-    background-color: #e17d76;
+    grid-template-columns: 30% 70%;
+    background-color: #d54e45;
+    margin: 1%;
+    padding: 1%;
+    border-radius: 5%;
+    border-style: solid;
+    height: auto;
 }
+
+.commitcont {
+    display: grid;
+    grid-template-columns: 20% 60% 20%;
+}
+
+
+.pfp {
+    display: flex;
+    justify-items: center;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.about {
+    width: 60%;
+    background-color: #e17d76;
+    border-style: dotted;
+    height: 100;
+    border-radius: 5%;
+    margin: 1%;
+    display: grid;
+    grid-template-columns: 100%;
+
+}
+
+
+.desc {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+}
+
