@@ -4,7 +4,6 @@ class main:
     def __init__(self):
         self.establishConnection()
         
-    
     def establishConnection(self):
                 try:
                     self.connection = sql.connect("Data.db")

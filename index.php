@@ -71,55 +71,52 @@ What we also do: <br>
 
   <div class = "commitcont">
     <?php foreach ($out as $index => $counter): ?>
-      <?php $member = fixcommittee($counter);
-      $fullname = $member[0] . " " . $member[1]; 
-      $pfp = $member[2];
-      $rolename = $member[3];
-      $about = $member[4];
-      ?>
-      <div></div>
-      <div class="committee">
-          <div class = "pfp">
-            <div id="pfp<?php echo $index; ?>"></div>
-          </div>
-          <div class = "desc">
-            <div class="about">
-              <div>
-                <p>Role:</p>
-                <p><?php echo $rolename;?></p>
+      <?php if ($counter != ""): ?>
+        <?php
+          $member = fixcommittee($counter);
+          $fullname = $member[0] . " " . $member[1]; 
+          $pfp = $member[2];
+          $rolename = $member[3];
+          $about = $member[4];
+        ?>
+        <div></div>
+        <div class="committee">
+            <div class = "pfp">
+              <div id="pfp<?php echo $index;?>"></div>
+            </div>
+            <div class = "desc">
+              <div class="about">
+                <div>
+                  <p>My name is: <?php echo $fullname;?></p>
+                  <p>Role: <?php echo $rolename;?></p>
+                </div> 
               </div>
-              <div>
-                <p>My name is: </p>
-                <p><?php echo $fullname;?></p>
-              </div>  
+              <div class = "about">
+                <div>
+                  <b>About me:</b>
+                  <p class = "text"><?php echo $about;?> </p>
+                </div>  
+              </div>
             </div>
             <br>
-            <div class = "about">
-              <div>
-                <p>About me:</p>
-                <p class = "text"> <?php echo $about;?> </p>
-              </div>  
-            </div>
-          </div>
-          <br>
 
-          <style>
-            #pfp<?php echo $index; ?> {
-              justify-items: center;
-              justify-content: center;
-              height:20vh;
-              width:10vw;
-              background-image: url(<?php echo $pfp;?>);
-              border-radius: 50%;
-              background-position: center;
-              background-size: auto 20vh;
-              background-repeat: no-repeat;
-              margin: 1%;
-              }
-          </style>
-      </div>
-      <div></div>
-
+            <style>
+              #pfp<?php echo $index; ?> {
+                justify-items: center;
+                justify-content: center;
+                height:50vh;
+                width:100%;
+                background-image: url(<?php echo $pfp;?>);
+                border-radius: 50%;
+                background-position: center;
+                background-size: auto 100%;
+                background-repeat: no-repeat;
+                margin: 1%;
+                }
+            </style>
+        </div>
+        <div></div>
+        <?php endif; ?>
     <?php endforeach; ?>
   </div>
 

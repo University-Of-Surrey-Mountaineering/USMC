@@ -93,8 +93,9 @@ body {
 
 
 .committee {
+    width: 100%;
     display: grid;
-    grid-template-columns: 30% 70%;
+    grid-template-columns: 50% 50%;
     background-color: #d54e45;
     margin: 1%;
     padding: 1%;
@@ -105,23 +106,24 @@ body {
 
 .commitcont {
     display: grid;
-    grid-template-columns: 20% 60% 20%;
+    grid-template-columns: 10% 80% 0%;
 }
 
 
 .pfp {
     display: flex;
-    justify-items: center;
-    justify-content: center;
-    align-items: center;
     height: 100%;
+    width: 100%;
+    border-style: solid;
 }
 
 .about {
+    display: flex;
+    align-items: center;
+    height: auto;
     width: 60%;
     background-color: #e17d76;
     border-style: dotted;
-    height: 100;
     border-radius: 5%;
     margin: 1%;
     display: grid;
@@ -131,9 +133,9 @@ body {
 
 
 .desc {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 100%;
+    padding: 0%;
     justify-items: center;
 }
 
