@@ -89,7 +89,6 @@ What we also do: <br>
                 <div>
                   <p>My name is: <?php echo $fullname;?></p>
                   <p>Role: <?php echo $rolename;?></p>
-                  
                 </div> 
               </div>
               <div class = "about">
