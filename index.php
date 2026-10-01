@@ -1,4 +1,5 @@
 <?php 
+session_start();
 $command = trim("python ./getallcommittee.py");
 $output = shell_exec($command);
 $out = explode("\n", $output);
@@ -26,8 +27,6 @@ function fixcommittee($string) {
 
 ?>
 
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,7 +39,41 @@ function fixcommittee($string) {
   <header class = "Banner">
     <div><img src="Photos/edited-photo.png"></div>
     <div></div>
-    <div class="login"><button onclick="location.href = 'login.php'">login</button></div>
+    <?php if (!isset($_SESSION["ID"])): ?>
+      <div class="login"><button onclick="location.href = 'login.php'">login</button></div>
+    <?php else: ?>
+      <div>
+        <a href="user.php">
+          <?php
+
+          $ID = $_SESSION["ID"];
+          $Username = $_SESSION["Username"];
+          $usercommand = trim("python ./retrieveuserdetails.py " . $ID);
+          $useroutput = shell_exec($usercommand);
+          $userout = explode("\n", $useroutput);
+          
+          try {
+              $userpfp = $userout[4];
+          }
+          catch (Exception $e) {
+              $userpfp = "Photos/000099290029.jpg";
+          }
+          ?>
+        <div>
+          <div id = "userpfp"></div>
+          <p><?php echo $Username;?></p>
+        </div>
+        </a>
+        <style>
+          #userpfp {
+            background-image: url(<?php echo $userpfp;?>);
+            height: 20px;
+            width: 10px;
+            background-size: 10px 10px;
+          }
+        </style>
+      </div>
+    <?php endif; ?>
   </header>   
 
   <div class = "Header">
@@ -102,10 +135,12 @@ What we also do: <br>
 
             <style>
               #pfp<?php echo $index; ?> {
+                display: flex;
+                align-items: center;
                 justify-items: center;
                 justify-content: center;
                 height:50vh;
-                width:100%;
+                width:25vw;
                 background-image: url(<?php echo $pfp;?>);
                 border-radius: 50%;
                 background-position: center;

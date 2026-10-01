@@ -5,8 +5,6 @@ import sys
 class main:
     def __init__(self, id):
         self.id = id
-        
-        
         self.getmembership()
         self.checkRecords()
         if len(self.memberships) > 1:

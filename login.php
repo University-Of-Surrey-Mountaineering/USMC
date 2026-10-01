@@ -1,5 +1,10 @@
 <?php
 
+if (isset($_SESSION["ID"])) {
+  unset($_SESSION["ID"]);
+  unset($_SESSION["Username"]);
+}
+
 function test_input($data) {
   $data = trim($data);
   $data = stripslashes($data);
@@ -31,7 +36,7 @@ $output = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $uname = test_input($_POST["UserName"]);
   $pword = test_input($_POST["Password"]);
-  $command = "python ./login.py '" . $uname . "' ".  $pword;
+  $command = "python ./login.py " . $uname . " ".  $pword;
   $output = trim(shell_exec($command));
   try{
     save_data($output);

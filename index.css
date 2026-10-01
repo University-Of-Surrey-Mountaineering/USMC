@@ -106,15 +106,15 @@ body {
 
 .commitcont {
     display: grid;
-    grid-template-columns: 10% 80% 0%;
+    grid-template-columns: 10% 80% 10%;
 }
 
 
 .pfp {
     display: flex;
+    justify-content: center;
     height: 100%;
     width: 100%;
-    border-style: solid;
 }
 
 .about {
