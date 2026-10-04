@@ -103,7 +103,7 @@ $background_image = "Photos/IMG_0943.JPG";
                     }
                 </style>
             </div>
-        
+            <!--
             <div class="section">
                 <div></div>
                 <div class="next_trip">
@@ -132,14 +132,16 @@ $background_image = "Photos/IMG_0943.JPG";
 
                 <div></div>
             </div>
+                        -->
+            <?php if (!($commitee != 1)): ?>
             <div class="section">
                 <div></div>
                 <div>
-                    <a href = "approvemember.php">hhhh</a>
+                    <a href = "approvemember.php">Approve members</a>
                 </div>
                 <div></div>
             </div>
-
+            <?php endif;?>
         </div>
         <div></div>
     </div>

@@ -11,12 +11,15 @@ body {
     position: sticky;
     top: 0;
     width: 100vw;
-    height: 10vh;
+    height: 15vh;
     padding: 0;
     text-align: left;
     background-color: #d54e45;
 }
-
+.Banner a {
+    text-decoration: none;
+    color: #d54e45;
+}
 .Banner div {
     display: flex;
     justify-content: center;
@@ -39,9 +42,6 @@ body {
     grid-template-columns: 20% 60% 20%;
 }
 
-.test {
-    height: 100vh;
-}
 
 
 
@@ -89,6 +89,14 @@ body {
     justify-content: center;
     text-align: center;
     justify-items: center;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    background-color: #d54e45;
+    border-style: solid;
+    border-radius: 10%;
+    padding: 2%;
 }
 
 
