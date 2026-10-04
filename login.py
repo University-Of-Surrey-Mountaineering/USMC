@@ -1,5 +1,6 @@
 import databaseconnection as data
 import sys
+import base64
 
 
 class main:
@@ -8,7 +9,7 @@ class main:
         self.Uname = Uname
         self.Pword = Pword
         
-        self.data = data.main()
+        
         
         self.login()
         
@@ -20,15 +21,18 @@ class main:
             
             
     def login(self):
-        query = "SELECT ID FROM Users WHERE UserName == '" + self.Uname + "' AND Password == '" + self.Pword + "'"
+        Data = data.main()
+        query = "SELECT ID FROM Users WHERE UserName == '" + self.Uname + "' AND Password == '" + Data.encodestring(self.Pword) + "'"
+        
         try:
-            self.data.execute(query)
-            self.ID = self.data.fetchOneRecord()[0]
+            Data.execute(query)
+            self.ID = Data.fetchOneRecord()[0]
             
         except:
+            
             self.ID = -1
             
-        self.data.closeConnection()
+        Data.closeConnection()
         
 
 if __name__ == "__main__":

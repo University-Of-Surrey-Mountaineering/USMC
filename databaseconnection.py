@@ -1,4 +1,5 @@
 import sqlite3 as sql
+import base64
 
 class main:
     def __init__(self):
@@ -37,7 +38,14 @@ class main:
         except:
             raise Exception()
     
-    
+    def encodestring(self, string):
+        enc_pass = base64.b64encode(string.encode('utf-8')).decode('utf-8')
+        return enc_pass
+
+    def decodestring(self, string):
+        dec_pass = base64.b64decode(string).decode('utf-8')
+        return dec_pass
+        
     def getCursor(self):
         return self.Cursor
     

@@ -34,10 +34,10 @@ class main:
     
     
     def createprofile(self):
+        data = Data.main()
         query = ("INSERT INTO Users (UserName, Password, Forename, Surname, [Email Address]) "
-        "VALUES ('" + self.username + "', '" + self.password + "', '" + self.forename + "', '" + self.surname + "', '" + self.email + "');")
+        "VALUES ('" + self.username + "', '" + data.encodestring(self.password) + "', '" + self.forename + "', '" + self.surname + "', '" + self.email + "');")
         try:
-            data = Data.main()
             data.update(query)
             data.closeConnection()
             return "Account added"

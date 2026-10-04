@@ -18,6 +18,10 @@ function save_data($output) {
     
     $ID = $out[0];
     $uname = $out[1];
+    if(isset($_SESSION["ID"])) {
+      unset($_SESSION["ID"]);
+      unset($_SESSION["uname"]);
+    }
     $_SESSION["ID"] = $ID;
     $_SESSION["Username"] = $uname;
     header("Location: dashboard.php");

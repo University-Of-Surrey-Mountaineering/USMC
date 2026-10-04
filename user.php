@@ -22,9 +22,13 @@ $memberexp = $memberout[1];
 
 try {
     $pfp = $out[4];
+    if ($pfp == "None") {
+        $pfp = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png";
+    }
 }
 catch (Exception $e) {
-    $pfp = "Photos/000099290029.jpg";
+    
+    $pfp = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png";
 }
 
 if (!isset($_SESSION["Committee"]) and $commitee == 1) {
@@ -65,10 +69,11 @@ function test_input($data) {
 
         <div class = "member_details">
         
-            <a class = "pfp_container" onclick="uploadpicture()">
-                <div id = "pfp">
-                </div>
-            </a>
+            <div class = "pfp_container" onclick="uploadpicture()">
+                <a id = "pfp">
+                    
+                </a>
+            </div>
 
 
             <div class = "details">
@@ -104,41 +109,60 @@ function test_input($data) {
             </style>
 
         </div>
-
         <div></div>
     </div>
+    <div class = "changepfp">
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post" enctype="multipart/form-data">
+                <h1>Please Upload a profile picture</h1><br>
+                <input type="file" name = "uploadedpfp" accept=".jpg, .jpeg, .png">
+                <input type="submit" name = "pfpsubmit" value = "pfpsubmit">
+            </form>
+        </div>
+        <style>
+            .changepfp {
+                display: flex;
+                justify-content: center;
+                justify-items: center;
+                align-items: center;
+            }
+        </style>
     <?php 
-    if ($_SERVER["REQUEST_METHOD"] == "POST" and $_POST['pfpsubmit'] == 'pfpsubmit') {
-        if  (!file_exists("Photos/UserImages/" . $ID . "/")){
-            mkdir("Photos/UserImages/" . $ID . "/");
-        }
-        $targetdestination = "Photos/UserImages/" . $ID . "/";
-        $targetfile = $targetdestination . basename($_FILES["uploadedpfp"]["name"]);
-        $check = getimagesize($_FILES['uploadedpfp']['tmp_name']);
-        if ($check !== false) {
-            $uploadok = 1;
-        } else {
-            $uploadok = 0;
-        }
+    try{
+        if ($_SERVER["REQUEST_METHOD"] == "POST" and $_POST['pfpsubmit'] == 'pfpsubmit') {
+            if  (!file_exists("Photos/UserImages/" . $ID . "/")){
+                mkdir("Photos/UserImages/" . $ID . "/");
+            }
+            $targetdestination = "Photos/UserImages/" . $ID . "/";
+            $targetfile = $targetdestination . basename($_FILES["uploadedpfp"]["name"]);
+            $check = getimagesize($_FILES['uploadedpfp']['tmp_name']);
+            if ($check !== false) {
+                $uploadok = 1;
+            } else {
+                $uploadok = 0;
+            }
 
-        if ($uploadok == 1) {
-            if (move_uploaded_file($_FILES["uploadedpfp"]["tmp_name"], $targetfile)) {
-                $uploadcommand = "python ./imgupload.py 1 " . $ID . " " . $targetfile;
-                echo $uploadcommand;
-                $uploadoutput = trim(shell_exec($uploadcommand));
-                $uploadout = explode("\n", $uploadoutput);
-                if ($uploadout[0] == "Success") {
-                    echo "Successfully uploaded";
+            if ($uploadok == 1) {
+                if (move_uploaded_file($_FILES["uploadedpfp"]["tmp_name"], $targetfile)) {
+                    $uploadcommand = "python ./imgupload.py 1 " . $ID . " " . $targetfile;
+                    echo $uploadcommand;
+                    $uploadoutput = trim(shell_exec($uploadcommand));
+                    $uploadout = explode("\n", $uploadoutput);
+                    if ($uploadout[0] == "Success") {
+                        echo "Successfully uploaded";
+                    } else {
+                        echo "An error occured";
+                    }
                 } else {
-                    echo "An error occured";
+                    echo "An error occured stopping upload";   
                 }
             } else {
-                echo "An error occured stopping upload";   
+                echo "There was an error";
             }
-        } else {
-            echo "There was an error";
+            header("Location: userprocess.php");
         }
-        header("Location: userprocess.php");
+    }
+    catch (Exception $e) {
+        
     }
     ?>
     <div class="profilepicuploadcontainer" id = "pfpupload">
@@ -180,8 +204,8 @@ function test_input($data) {
             }
         }
         ?>
-
         <form action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "post" enctype="multipart/form-data">
+            <h1>Please send in a photo of your receipt</h1><br>
             <input type="file" name = "approvalimage" accept=".jpg, .jpeg, .png">
             <input type="submit" name = "approvalsubmit" value="approvalsubmit">
         </form>
@@ -308,16 +332,17 @@ function test_input($data) {
 
 
 <script>
-    onload = openmessage()
+    onload = openmessage();
     function openmessage() {
         <?php if ($_POST['submit'] == 'Save' or $_POST['changedetails'] == 'Submit'): ?>
             document.getElementById("messageform").style.display = "grid";
         <?php endif; ?>
-    }
+    };
+
 
     function uploadpicture() {
         document.getElementById("pfpupload").style.display = "flex";
-    }
+    };
 
 </script>
 
