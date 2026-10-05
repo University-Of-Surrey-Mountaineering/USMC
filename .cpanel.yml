@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/your-cpanel-username/public_html/
+    - /bin/cp -R assets css js index.html $DEPLOYPATH
